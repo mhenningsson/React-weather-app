@@ -13,13 +13,15 @@ class App extends React.Component {
 	}
 	
 	getWeatherAPI = (search) => {
-		Axios('http://api.openweathermap.org/data/2.5/weather?q=' + search + '&units=metric&appid=a9f6719e37f20890ebff5d91724dec1f')
+		Axios.get('http://api.openweathermap.org/data/2.5/weather?q=' + search + '&units=metric&appid=a9f6719e37f20890ebff5d91724dec1f')
 		.then(response => {
 			if (response.status === 200) {
 				this.setState({
 					report: true,
 					cityResponse: response.data,
 				})
+			} else {
+				this.renderError()
 			}
 		})
 		.catch(err => {
